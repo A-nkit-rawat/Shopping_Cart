@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+                th:replace="NavBar::navbar(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <section>
+        <div class="container-fluid mt-5 pt-5">
+            <div class="card">
+                <div class="card-header text-center fs-4"> View Products</div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                        </tr>
+                        <tr th:each="prod,i:${products}">
+                            <td th:text="${i.count}"></td>
+                            <td th:text="${prod.name}"></td>
+                            <td th:text="${prod.description}"></td>
+                            <td><img th:src="@{'/images/category_img/'+${prod.image}}" width="50px" height="50px" alt="Category Image"></td>
+                            <td th:if="${prod.isActive}">Available</td>
+                            <td th:if="${prod.isActive}==false">Not-Available</td>
+                            <td th:text="${prod.price}"></td>
+                            <td th:text="${prod.category}"></td>
+                            <td th:text="${prod.stock}"></td>
+                            <td> <a class="btn btn-primary" th:href="@{'/admin/delete_product/'+${prod.id}}" role="button">Delete</a></td>
+                            <td><a class="btn btn-primary" th:href="@{'/admin/edit_product/'+${prod.id}}" role="button">Edit</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

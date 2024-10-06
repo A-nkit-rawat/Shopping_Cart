@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		th:fragment="navbar(title)">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-dark">
+  <!-- Navbar content -->
+	  <div class="container-fluid">
+	    <a class="navbar-brand" href="#">ShopNow</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	        <li class="nav-item">
+	          <a class="nav-link active" aria-current="page" href="#">Home</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="/product?category=">Product</a>
+	        </li>
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            Dropdown
+	          </a>
+	          <ul class="dropdown-menu">
+	            <li><a class="dropdown-item" href="#">Action</a></li>
+	            <li><a class="dropdown-item" href="#">Another action</a></li>
+	            <li><hr class="dropdown-divider"></li>
+	            <li><a class="dropdown-item" href="#">Something else here</a></li>
+	          </ul>
+	        </li>
+	        <!--<li class="nav-item">
+	          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+	        </li>-->
+	      </ul>
+	      
+	      
+	      <!-- adding boxes to the last of navbar this is second unorded list of div container-->
+	      
+
+	      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+			  <th:block th:if="${userDtl==null}">
+	        <li class="nav-item">
+	          <a class="nav-link " aria-current="page" href="./signIn">LOG IN</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="/register">SIGN UP</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">ADMIN</a>
+	        </li>
+			  </th:block>
+			  <th:block th:if="${userDtl!=null}">
+				  <li class="nav-item">
+					  <a class="nav-link" href="/user/cart" th:text="'Cart:'+${noOfCartItems}"></a>
+				  </li>
+			  <li class="nav-item dropdown">
+				  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  [[${userDtl.name}]]
+				  </a>
+				  <ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="#">Profile</a></li>
+					  <li><a class="dropdown-item" href="/user/view_orders">My Orders</a></li>
+				  </ul>
+				  <a class="nav-link" href="/admin/"></a>
+			  </li>
+			  <li class="nav-item">
+				  <a class="nav-link" href="/logout">LogOut</a>
+			  </li>
+
+			  </th:block>
+	      </ul>
+
+
+	      <!--<form class="d-flex" role="search">
+	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+	        <button class="btn btn-outline-success" type="submit">Search</button>
+	      </form>-->
+	    </div>
+	  </div>
+</nav>
+
+<!--NAV BAR ENDED -->
+
+<!-- FOR HOME/INDEX PAGE THIS WILL DIRECTED TO INDEX PAGE AND SEGMENT PART OF HOME/LNDEX WILL REPLACE <h2> -->
+	<h2 th:replace="${title}"></h2>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      th:replace="NavBar::navbar(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<section>
+  <div class="container-fluid mt-5 pt-5">
+    <div class="card">
+      <div class="card-header text-center fs-4"> View Users</div>
+      <div class="card-body">
+        <table class="table">
+          <tr>
+            <th>Sr No</th>
+            <th>User Name</th>
+            <th>Mobile Number</th>
+            <th>email ID</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+<!--            <th>profile Image</th>-->
+            <th>role</th>
+
+            <th>Is Enabled</th>
+          </tr>
+          <tr th:each="user,i:${userList}">
+            <td th:text="${i.count}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.mobileNumber}"></td>
+
+            <td th:text="${user.email}">Available</td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.city}"></td>
+<!--            <td><img th:src="@{'/images/category_img/'+${prod.image}}" width="50px" height="50px" alt="Category Image"></td>-->
+            <td th:text="${user.state}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.isEnabled}"></td>
+            <td> <a class="btn btn-primary" th:href="@{'./users/updateUserAccountStatus/'+${user.id}+'?setStatus=false'}" role="button">Disable</a></td>
+            <td><a class="btn btn-primary" th:href="@{'./users/updateUserAccountStatus/'+${user.id}+'?setStatus=true'}" role="button">Active</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

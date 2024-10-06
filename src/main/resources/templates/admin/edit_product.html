@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="NavBar::navbar(~{::section})">
+<head >
+  <meta charset="ISO-8859-1">
+  <title>Insert title here</title>
+</head>
+<body>
+<section>
+  <div class="container-fluid p-5 mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header text-center fs-4"> Add Category </div>
+          <div class="card-body">
+            <form action="./update_product/" method="POST" enctype="multipart/form-data">
+<!--              <div class="mb-3" th:if="${error}">-->
+                <p class="text-danger fw-bold" th:text="${Msg}" ></p>
+<!--              </div>-->
+<!--              <div class="mb-3" th:if="${success}">-->
+<!--                <p class=" text-success fw-bold" th:text="${Msg}"></p>-->
+<!--              </div>-->
+              <input name="id" th:value="${product.id}" hidden="hidden">
+              <div class="md-3">
+                <lable>Enter Title</lable><input type="text" name="name" th:value="${product.name}" class="form-control">
+              </div>
+              <div class="md-3">
+                <lable>Enter Description</lable><input type="text" name="description"  th:value="${product.description}" class="form-control">
+              </div>
+              <div class="md-3 mt-4">
+                <lable>Category</lable>
+                <select name="category" >
+                  <option>[[${product.category}]]</option>
+                  <option th:each="cat:${category}">[[${cat.name}]]</option>
+                </select>
+              </div>
+                <div class="mb-3">
+                    <label>Status</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="isActive" value="true" id="flexRadioDefault1" th:checked="${product.isActive}==true">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="isActive" value="false" id="flexRadioDefault2" th:checked="${product.isActive}==false">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            InActive
+                        </label>
+                    </div>
+                </div>
+              <div class="md-3 mt-4 ">
+                <lable>Enter Price</lable><input type="text" name="price" th:value="${product.price}" class="form-control">
+              </div>
+                <div class="md-3 mt-4 ">
+                    <lable>Enter Discount%</lable><input type="text" name="discount" th:value="${product.discount}" class="form-control">
+                </div>
+                <div class="md-3 mt-4 ">
+                    <lable>Discounted Price</lable><input type="text" name="discountedPrice" th:value="${product.discountedPrice}" class="form-control" readonly>
+                </div>
+              <div class="row mt-2" >
+                <div class="col mb-3">
+                  <label>Enter Stock</label><input type="number" name="stock" th:value="${product.stock}" class="form-control">
+                </div>
+                <div class="col mb-3">
+                  <label>Image</label><input type="file" class="form-control" name="file">
+                </div>
+              </div>
+                <div class="col mb-3">
+                    <label>Old Image</label><img th:src="'image/admin/product_img/'+${product.image}">
+                </div>
+                <div class="col mb-3" hidden="hidden">
+                    <input th:type="'text'" th:value="${product.image}" name="image">
+                </div>
+
+              <button class="btn btn-primary col-md-12">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
